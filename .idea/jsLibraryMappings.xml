@@ -3,7 +3,7 @@
   <component name="JavaScriptLibraryMappings">
     <file url="file://$PROJECT_DIR$" libraries="{ExpressAngularSeed node_modules}" />
     <file url="file://$PROJECT_DIR$/test/backend-tests/restAPITests.js" libraries="{mocha-DefinitelyTyped}" />
-    <file url="PROJECT" libraries="{should-DefinitelyTyped}" />
+    <file url="PROJECT" libraries="{Node.js v0.10.32 Core Modules, angular, angular-protractor-DefinitelyTyped, angularjs-DefinitelyTyped, bootstrap-DefinitelyTyped, express-DefinitelyTyped, jasmine-DefinitelyTyped, mocha-DefinitelyTyped, mongodb-DefinitelyTyped, mongoose-DefinitelyTyped, should-DefinitelyTyped, sinon-DefinitelyTyped}" />
     <includedPredefinedLibrary name="Node.js Globals" />
   </component>
 </project>

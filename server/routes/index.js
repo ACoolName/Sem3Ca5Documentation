@@ -24,9 +24,9 @@ router.post('/authenticate', function (req, res) {
         return;
     }
 
-    if (req.body.username === 'teacher' && req.body.password === 'test') {
+    if (req.body.username === 'admin' && req.body.password === '1234acoolname') {
         var profile = {
-            username: 'Peter the Teacher',
+            username: 'Admin',
             role: "admin",
             id: 123423
         };

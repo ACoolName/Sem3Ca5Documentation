@@ -18,12 +18,20 @@ angular.module('myAppRename.controllers', []).
             return window.atob(output); //polifyll https://github.com/davidchambers/Base64.js
         }
 
+        if(loggedIn()) {
+            $scope.username = $window.sessionStorage.username;
+            $scope.isAdmin = $window.sessionStorage.role == "admin";
+            $scope.isUser = !$scope.isAdmin;
+            $scope.isAuthenticated = true;
+        } else {
+            $scope.username = "";
+            $scope.isAuthenticated = false;
+            $scope.isAdmin = false;
+            $scope.isUser = false;
+        }
 
         $scope.title = "Semester Project";
-        $scope.username = "";
-        $scope.isAuthenticated = false;
-        $scope.isAdmin = false;
-        $scope.isUser = false;
+
         $scope.message = '';
         $scope.error = null;
 
@@ -35,6 +43,7 @@ angular.module('myAppRename.controllers', []).
                     $scope.isAuthenticated = true;
                     var encodedProfile = data.token.split('.')[1];
                     var profile = JSON.parse(url_base64_decode(encodedProfile));
+                    $window.sessionStorage.username = profile.username;
                     $scope.username = profile.username;
                     $scope.isAdmin = profile.role == "admin";
                     $scope.isUser = !$scope.isAdmin;
@@ -42,18 +51,29 @@ angular.module('myAppRename.controllers', []).
                 })
                 .error(function (data, status, headers, config) {
                     // Erase the token if the user fails to log in
-                    delete $window.sessionStorage.token;
+                    deleteSession();
                     $scope.isAuthenticated = false;
-
                     $scope.error = 'You failed to login. Invalid User or Password';
                 });
         };
+        function loggedIn() {
+            if($window.sessionStorage.token == undefined || $window.sessionStorage.token == null) {
+                return false;
+            }
+            return true;
+        }
+        $scope.isLoggedin = loggedIn;
 
+        function deleteSession() {
+            delete $window.sessionStorage.token;
+            delete $window.sessionStorage.username;
+            delete $window.sessionStorage.role;
+        }
         $scope.logout = function () {
             $scope.isAuthenticated = false;
             $scope.isAdmin = false;
             $scope.isUser = false;
-            delete $window.sessionStorage.token;
+            deleteSession();
             $location.path("/view1");
         }
     })

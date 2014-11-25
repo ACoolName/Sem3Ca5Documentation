@@ -8,6 +8,7 @@ var db = require("./model/db");
 var routes = require('./routes/index');
 var adminRest = require('./routes/REST_Admin_API');
 var userRest = require('./routes/REST_Users_API');
+var restApi = require('./routes/REST_API');
 
 var expressJwt = require('express-jwt');
 
@@ -37,6 +38,7 @@ app.use(express.static(path.join(__dirname, '../public/app')));
 app.use('/', routes);
 app.use('/adminApi', adminRest);
 app.use('/userApi', userRest);
+app.use('/api', restApi);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

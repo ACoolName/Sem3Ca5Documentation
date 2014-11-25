@@ -1,20 +1,21 @@
 'use strict';
 
 
-angular.module('myAppRename.view3', ['ngRoute'])
+angular.module('myAppRename.view4', ['ngRoute'])
 
     .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/view3', {
-            templateUrl: 'app/view3/view3.html',
-            controller: 'View3Ctrl'
+        $routeProvider.when('/view4', {
+            templateUrl: 'app/view4/view4.html',
+            controller: 'view4Ctrl'
         });
     }])
 
-    .controller('View3Ctrl', function ($scope, $http) {
+    .controller('view4Ctrl', function ($scope, $http) {
         var getDocumentation = function () {
             $http.get('/api/documentation')
                 .success(function (data, status, headers, config) {
                     $scope.doc = data;
+                    console.log($scope.doc);
                     $scope.error = null;
                 })
                 .error(function (data, status) {
@@ -25,12 +26,15 @@ angular.module('myAppRename.view3', ['ngRoute'])
                     $scope.error = data;
                 });
         };
+        console.log("dasdas");
         $http.post('/adminApi/documentation').
             success(function (data, status, headers, config) {
+                console.log("hi");
                 getDocumentation();
             });
 
         $scope.editDocumentation = function () {
+            console.log($scope.doc);
             $http.put('/adminApi/documentation', JSON.stringify($scope.doc))
                 .success(function (data, status, headers, config) {
                     $scope.do = data;

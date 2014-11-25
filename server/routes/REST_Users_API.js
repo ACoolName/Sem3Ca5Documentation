@@ -1,4 +1,6 @@
-var express = require('express');
+var express = require('express')
+var mongoose = require('mongoose');
+var doc = mongoose.model('Documentation');
 
 var router = express.Router();
 router.get('/test', function (req, res) {

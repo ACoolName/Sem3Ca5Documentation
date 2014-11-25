@@ -11,15 +11,16 @@ angular.module('myAppRename.view2', ['ngRoute'])
     .controller('View2Ctrl', ['$scope', '$http', function ($scope, $http) {
         $http({
             method: 'GET',
-            url: 'userApi/test'
+            url: 'api/documentation'
         })
             .success(function (data, status, headers, config) {
                 $scope.info = data;
+                console.log($scope.info);
                 $scope.error = null;
             }).
             error(function (data, status, headers, config) {
-                if (status == 401) {
-                    $scope.error = "You are not authenticated to request these data";
+                if (status == 404 || status || 500) {
+                    $scope.error = "ERROROROR";
                     return;
                 }
                 $scope.error = data;

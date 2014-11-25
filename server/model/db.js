@@ -21,7 +21,7 @@ if (typeof global.TEST_DATABASE != "undefined") {
     dbURI = global.TEST_DATABASE;
 }
 else {
-    dbURI = 'mongodb://localhost/testdb';
+    dbURI = 'mongodb://localhost/documentation';
 }
 
 mongoose.connect(dbURI);
@@ -56,5 +56,11 @@ var usersSchema = new mongoose.Schema({
     created: { type: Date, default: new Date() }
 });
 
+var documentationSchema = new mongoose.Schema({
+    title: String,
+    text: String
+});
+
 mongoose.model('User', usersSchema, "testusers");
+mongoose.model('Documentation', documentationSchema, "documents");
 
