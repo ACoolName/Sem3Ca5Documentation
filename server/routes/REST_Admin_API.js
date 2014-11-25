@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 var mongoose = require('mongoose');
+var Stuff = mongoose.model('Stuff');
 var user = mongoose.model('User');
 var doc = mongoose.model('Documentation');
 var errorHandler = require("../services/errorHandler");
@@ -24,19 +25,11 @@ router.get('/user', function (req, res) {
     });
 });
 
-router.post('/documentation', function (req, res) {
-    doc.findOne({title: "doc1"}, function (err, entity) {
-        if (errorHandler.errorHandle(err, res, 500, 'iternal')) {
+router.post('/stuff', function (req, res) {
+    var stuff = new Stuff(req.body);
+    stuff.save(function (err) {
+        if (errorHandler.errorHandle(err, res, 404, 'not found')) {
             return;
-        }
-        if (!entity) {
-            var document = new doc({title: "doc1", text: "insert documentatiotn"});
-            document.save(function (err) {
-                if (errorHandler.errorHandle(err, res, 500, 'iternal')) {
-                    return;
-                }
-                res.end();
-            })
         }
         res.end();
     })

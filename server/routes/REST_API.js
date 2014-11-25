@@ -1,6 +1,7 @@
 var express = require('express');
 var mongoose = require('mongoose');
 var doc = mongoose.model('Documentation');
+var Stuff = mongoose.model('Stuff');
 var router = express.Router();
 var errorHandler = require("../services/errorHandler");
 
@@ -18,6 +19,18 @@ router.get('/documentation', function (req, res) {
     });
 });
 
+router.get('/stuff', function (req, res) {
+    Stuff.find({}, function (err, entities) {
+        if (errorHandler.errorHandle(err, res, 500, 'iternal')) {
+            return;
+        }
+        if (errorHandler.errorHandle(!entities, res, 404, 'not found')) {
+            return;
+        }
+        res.header("Content-type", "application/json");
+        res.end(JSON.stringify(entities));
+    });
+});
 
 
 module.exports = router;

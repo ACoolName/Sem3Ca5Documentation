@@ -11,30 +11,24 @@ angular.module('myAppRename.view3', ['ngRoute'])
     }])
 
     .controller('View3Ctrl', function ($scope, $http) {
-        var getDocumentation = function () {
-            $http.get('/api/documentation')
-                .success(function (data, status, headers, config) {
-                    $scope.doc = data;
-                    $scope.error = null;
-                })
-                .error(function (data, status) {
-                    if (status == 500) {
-                        $scope.error = "ERROROROR";
-                        return;
-                    }
-                    $scope.error = data;
-                });
-        };
-        $http.post('/adminApi/documentation').
-            success(function (data, status, headers, config) {
-                getDocumentation();
+        $http.get('/api/documentation')
+            .success(function (data, status, headers, config) {
+                $scope.doc = data;
+                $scope.error = null;
+            })
+            .error(function (data, status) {
+                if (status == 500) {
+                    $scope.error = "ERROROROR";
+                    return;
+                }
+                $scope.error = data;
             });
 
         $scope.editDocumentation = function () {
             $http.put('/adminApi/documentation', JSON.stringify($scope.doc))
                 .success(function (data, status, headers, config) {
                     $scope.do = data;
-                    $scope.success = "Documentation updated";
+                    $scope.success = "Documentation updated at " + new Date();
                 })
                 .error(function (data, status, headers, config) {
                     $scope.error = data;

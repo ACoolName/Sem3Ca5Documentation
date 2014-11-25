@@ -15,7 +15,6 @@ angular.module('myAppRename.view2', ['ngRoute'])
         })
             .success(function (data, status, headers, config) {
                 $scope.info = data;
-                console.log($scope.info);
                 $scope.error = null;
             }).
             error(function (data, status, headers, config) {

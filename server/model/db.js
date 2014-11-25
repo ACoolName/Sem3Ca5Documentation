@@ -21,7 +21,7 @@ if (typeof global.TEST_DATABASE != "undefined") {
     dbURI = global.TEST_DATABASE;
 }
 else {
-    dbURI = 'mongodb://localhost/documentation';
+    dbURI = 'mongodb://icanteven:icanteven@ds053080.mongolab.com:53080/documentations';
 }
 
 mongoose.connect(dbURI);
@@ -50,10 +50,9 @@ process.on('SIGINT', function () {
 /** User SCHEMA **/
 /** Replace this Schema with your own(s) **/
 var usersSchema = new mongoose.Schema({
-    userName: String,
-    email: {type: String, unique: true},
+    username: String,
     pw: String,
-    created: { type: Date, default: new Date() }
+    salt: String
 });
 
 var documentationSchema = new mongoose.Schema({
@@ -61,6 +60,12 @@ var documentationSchema = new mongoose.Schema({
     text: String
 });
 
+var stuffSchema = new mongoose.Schema({
+    link: String,
+    info: String
+});
+
 mongoose.model('User', usersSchema, "testusers");
+mongoose.model('Stuff', stuffSchema, "stuff");
 mongoose.model('Documentation', documentationSchema, "documents");
 

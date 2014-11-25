@@ -44,6 +44,7 @@ angular.module('myAppRename.controllers', []).
                     var encodedProfile = data.token.split('.')[1];
                     var profile = JSON.parse(url_base64_decode(encodedProfile));
                     $window.sessionStorage.username = profile.username;
+                    $window.sessionStorage.role = profile.role;
                     $scope.username = profile.username;
                     $scope.isAdmin = profile.role == "admin";
                     $scope.isUser = !$scope.isAdmin;

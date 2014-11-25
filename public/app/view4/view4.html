@@ -1,9 +1,15 @@
-<div class="alert alert-danger" role="alert" ng-show="error">{{error}}</div>
-<label for="docu">Documentation</label>
-<textarea ng-model="doc.text" id="docu" class="form-control" rows="15"
-          placeholder="Enter Documentation"></textarea>
+<table class="table">
+  <thead>
+  <tr>
+    <th>Picture</th>
+    <th>Info</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="d in data">
+      <td><a href="{{d.link}}">link</a></td>
+      <td>{{d.info}}</td>
+    </tr>
+  </tbody>
 
-<button ng-click="editDocumentation()" type="button" class="btn btn-primary">Save</button>
-
-<p>{{success}}</p>
-<p>{{do}}</p>
+</table>
